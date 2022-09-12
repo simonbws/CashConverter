@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -70,18 +71,42 @@ namespace CashConverter
                 cmbFromCurr.Focus();
                 return;
             }
+            if (cmbFromCurr.Text == cmbFromCurr.Text)
+            {
+                TransformedValue = double.Parse(textCurr.Text);
+                labelCurr.Content = cmbToCurr.Text + " " + TransformedValue.ToString("N3");
+            }
+            else
+            {
+                TransformedValue = (double.Parse(cmbFromCurr.SelectedValue.ToString()) *
+                    double.Parse(textCurr.Text)) / double.Parse(cmbToCurr.SelectedValue.ToString());
+                labelCurr.Content = cmbToCurr.Text + " " + TransformedValue.ToString("N3");
+
+            }
 
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            labelCurr.Content = "Button clicked";
+            ClearControls();
 
         }
-    
+
+        private void ClearControls()
+        {
+            textCurr.Text = String.Empty;
+            if (cmbFromCurr.Items.Count > 0)
+                cmbFromCurr.SelectedIndex = 0;
+            if (cmbToCurr.Items.Count > 0)
+                cmbToCurr.SelectedIndex = 0;
+            labelCurr.Content = "";
+            textCurr.Focus();
+        }
+
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            labelCurr.Content = "Button clicked";
+            Regex rgx = new Regex("[^0-9]+");
+            e.Handled = rgx.IsMatch(e.Text);
 
         }
     }
