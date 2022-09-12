@@ -120,9 +120,6 @@
     <Resource Include="Pictures\money.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pictures\myLogo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Database\CashConverterData.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -130,6 +127,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>CashConverterData.mdf</DependentUpon>
     </Content>
+    <Resource Include="Pictures\myLogo2.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
