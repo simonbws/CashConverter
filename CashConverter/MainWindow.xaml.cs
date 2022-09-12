@@ -33,7 +33,14 @@ namespace CashConverter
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            
+            labelCurr.Content = "Button clicked";
+
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            labelCurr.Content = "Button clicked";
+
         }
     }
 }
