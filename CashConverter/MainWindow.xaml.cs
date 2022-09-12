@@ -37,11 +37,11 @@ namespace CashConverter
             //Value and Text needs to be added to database
             dtCurr.Rows.Add("SELECT", 0);
             dtCurr.Rows.Add("INR", 1);
-            dtCurr.Rows.Add("USD", 75);
+            dtCurr.Rows.Add("USD", 70);
             dtCurr.Rows.Add("EUR", 85);
             dtCurr.Rows.Add("SAR", 20);
             dtCurr.Rows.Add("POUND", 5);
-            dtCurr.Rows.Add("ZL", 0.75);
+            dtCurr.Rows.Add("ZL", 32);
 
             //We assign data currency to items source of CmbFromCurrency
             cmbFromCurr.ItemsSource = dtCurr.DefaultView;
@@ -59,7 +59,7 @@ namespace CashConverter
         {
             double TransformedValue;
 
-            if (textCurr.Text == null || textCurr.Text.Length == 0)
+            if (textCurr.Text == null || textCurr.Text.Trim() == "")
             {
                 MessageBox.Show("Please provide currency you want to transform", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
                 textCurr.Focus();
@@ -71,7 +71,16 @@ namespace CashConverter
                 cmbFromCurr.Focus();
                 return;
             }
-            if (cmbFromCurr.Text == cmbFromCurr.Text)
+            else if (cmbToCurr.SelectedValue == null || cmbToCurr.SelectedIndex == 0)
+            {
+                //Show the message
+                MessageBox.Show("Please Select Currency To", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                //Set focus on the To Combobox
+                cmbToCurr.Focus();
+                return;
+            }
+            if (cmbFromCurr.Text == cmbToCurr.Text)
             {
                 TransformedValue = double.Parse(textCurr.Text);
                 labelCurr.Content = cmbToCurr.Text + " " + TransformedValue.ToString("N3");
@@ -80,6 +89,7 @@ namespace CashConverter
             {
                 TransformedValue = (double.Parse(cmbFromCurr.SelectedValue.ToString()) *
                     double.Parse(textCurr.Text)) / double.Parse(cmbToCurr.SelectedValue.ToString());
+
                 labelCurr.Content = cmbToCurr.Text + " " + TransformedValue.ToString("N3");
 
             }
