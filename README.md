@@ -1,1 +1,1 @@
-# CashConverter
+# CashConverter app made in WPF
